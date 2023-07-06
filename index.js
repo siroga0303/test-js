@@ -51,10 +51,10 @@ async function getGamesData() {
     let xml;
     let part1 = Jsondata.length/2
     let part2 = Jsondata.length - part1
-    let a = 0;
-    function createBoard(part) {
     
-    for(a < part; a++){
+    function createBoard(part, number) {
+    
+    for(let a = number; a < part; a++){
         console.log(a)
         xml = await rp(`https://boardgamegeek.com/xmlapi/boardgame/${Jsondata[a]}?stats=1`);
         const dom = htmlparser2.parseDocument(xml);
@@ -73,8 +73,8 @@ async function getGamesData() {
         
     }
 
-    createBoard(part1)
-    setTimeout(createBoard, 10000, part2);
+    createBoard(part1, 0)
+    setTimeout(createBoard, 10000, part2, part1);
     
     
     
