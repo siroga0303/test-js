@@ -42,23 +42,22 @@ async function getJson() {
         
     }
     
-    let xml;
-    for(let a = 0; a < wikiID.length/2; a++){
-        console.log(a)
-        xml = await rp(`https://boardgamegeek.com/xmlapi/boardgame/${wikiID[a]}?stats=1`);
-    }
+    
+    
     return wikiID
     
   
   
 }
 
-async function getGamesData(Jsondata) {
-     
+async function getGamesData() {
+     let xml;
+    Jsondata = getJson()
     
-    for(let a = 0; a < Jsondata.length; a++){
+    for(let a = 0; a < Jsondata.length/2; a++){
         
-        
+        console.log(a)
+        xml = await rp(`https://boardgamegeek.com/xmlapi/boardgame/${Jsondata[a]}?stats=1`);
         const dom = htmlparser2.parseDocument(xml);
         const $ = cher.load(dom);
         boards[a].minplaytime = $("minplaytime", dom).text()
@@ -85,14 +84,14 @@ async function getGamesData(Jsondata) {
      return boards
 }
 let a;
-let b;
+
 app.get('/get', cors(corsOptions), async (req, res, next) => {
     numberPage = req.query.id
     console.log(numberPage)
     
-    b = await getJson()
+    a = await getGamesData()
     //a = await getJson(b);
-    res.send(b)
+    res.send(a)
     
   })
 app.listen(port, () => {
