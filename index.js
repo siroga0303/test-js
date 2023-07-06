@@ -80,7 +80,7 @@ async function getGamesData() {
   });
     await createBoard(part1, 0)
     
-    await setTimeoutAsync(createBoard, 10000, part2, part1);
+    await setTimeoutAsync(createBoard, 50000, part2, part1);
     
     
     
