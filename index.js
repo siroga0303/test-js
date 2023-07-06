@@ -74,7 +74,7 @@ async function getGamesData() {
     }
     
   
-    await createBoard(part1, 0)
+    await createBoard(20, 0)
     
     
     
