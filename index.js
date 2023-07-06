@@ -56,8 +56,8 @@ async function getGamesData() {
     
 
          
-    async function createBoard(num1) {
-         for(let a = 0; a < num1; a++){
+    async function createBoard(num1, num2) {
+         for(let a = num2; a < num1; a++){
 
          
         console.log(a)
@@ -75,7 +75,7 @@ async function getGamesData() {
     } 
     }
 
-     await createBoard(20);
+     await createBoard(20, 0);
     
         
     
