@@ -15,10 +15,7 @@ const corsOptions = {
     exposedHeaders: [],
     credentials: true
 };
-
 let boards = [];
-
-
 async function getJson() {
     const html = await rp(url);
     
@@ -49,13 +46,10 @@ async function getJson() {
   
   
 }
-
 async function getGamesData() {
-     let xml;
-    Jsondata = getJson()
-    
-    for(let a = 0; a < Jsondata.length/2; a++){
-        
+    Jsondata = await getJson();
+    let xml;
+    for(let a = 0; a < Jsondata.length; a++){
         console.log(a)
         xml = await rp(`https://boardgamegeek.com/xmlapi/boardgame/${Jsondata[a]}?stats=1`);
         const dom = htmlparser2.parseDocument(xml);
@@ -78,21 +72,19 @@ async function getGamesData() {
     
     
     
-
     
-
-     return boards
+     return JSON.stringify(boards)
 }
 let a;
-
 app.get('/get', cors(corsOptions), async (req, res, next) => {
     numberPage = req.query.id
-    console.log(numberPage)
     
+   
     a = await getGamesData()
-    //a = await getJson(b);
-    res.send(a)
+    next()
+  }, (req, res, next) => {
     
+    res.send(a)
   })
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
