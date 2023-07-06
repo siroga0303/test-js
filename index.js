@@ -72,9 +72,15 @@ async function getGamesData() {
     } 
         
     }
-
+    const setTimeoutAsync = (cb, delay,value1,value2) =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(cb());
+    }, delay,value1,value2);
+  });
     await createBoard(part1, 0)
-    await setTimeout(createBoard, 10000, part2, part1);
+    
+    await setTimeoutAsync(createBoard, 10000, part2, part1);
     
     
     
