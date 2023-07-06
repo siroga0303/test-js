@@ -50,8 +50,8 @@ async function getJson() {
   
 }
 
-async function getGamesData() {
-    Jsondata = await getJson();
+async function getGamesData(Jsondata) {
+     
     let xml;
     for(let a = 0; a < Jsondata.length; a++){
         console.log(a)
@@ -82,15 +82,18 @@ async function getGamesData() {
      return JSON.stringify(boards)
 }
 let a;
+let b;
 app.get('/get', cors(corsOptions), async (req, res, next) => {
     numberPage = req.query.id
-    numberPage = 1
-    a = await getGamesData()
+    console.log(numberPage)
+    
+    b = await getJson()
+    //a = await getJson(b);
     
     next()
   }, (req, res, next) => {
     
-    res.send(a)
+    res.send(b)
   })
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
