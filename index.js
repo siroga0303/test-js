@@ -82,9 +82,9 @@ async function getGamesData() {
      return JSON.stringify(boards)
 }
 let a;
-app.get('/get', cors(corsOptions), async (req, res, next) => {
+app.get('/', cors(corsOptions), async (req, res, next) => {
     numberPage = req.query.id
-    a = await getGamesData()
+    a = await getJson()
     
     next()
   }, (req, res, next) => {
