@@ -6,7 +6,13 @@ const cors = require('cors')
 const url = 'https://boardgamegeek.com/browse/boardgame';
 const app = express()
 const port = 3000
-
+const corsOptions = {
+    origin: '*',
+    methods: [],
+    allowedHeaders: [],
+    exposedHeaders: [],
+    credentials: true
+};
 
 async function getJson() {
     const html = await rp(url);
