@@ -7,6 +7,9 @@ let numberPage;
 const url = `https://boardgamegeek.com/browse/boardgame/page/${numberPage}`;
 const app = express()
 const port = 3000
+import {
+  setInterval,
+} from 'timers/promises';
 let Jsondata;
 const corsOptions = {
     origin: '*',
@@ -49,8 +52,8 @@ async function getJson() {
 async function getGamesData() {
     Jsondata = await getJson();
     let xml;
-    let part1 = Jsondata.length/2
-    let part2 = Jsondata.length - part1
+    let part = parseInt(Jsondata.length/10)
+   
     
     async function createBoard(part, number) {
     
@@ -73,8 +76,15 @@ async function getGamesData() {
         
     }
     
-  
-    await createBoard(20, 0)
+     
+    const interval = 100;
+for await (const startTime of setInterval(interval, Date.now())) {
+  const now = Date.now();
+  console.log(now);
+  if ((now - startTime) > 1000)
+    break;
+}
+console.log(Date.now());
     
     
     
