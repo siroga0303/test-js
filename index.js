@@ -85,7 +85,8 @@ async function getGamesData() {
 app.get('/get', cors(corsOptions), async (req, res) => {
     numberPage = req.query.id
     let a = await getGamesData()
-    
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.send(a)
   });
 
