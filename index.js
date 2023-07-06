@@ -56,8 +56,8 @@ async function getGamesData() {
     
 
          
-    
-    for(let a = 0; a < 20; a++){
+    async function createBoard() {
+         for(let a = 0; a < 20; a++){
 
          
         console.log(a)
@@ -73,6 +73,10 @@ async function getGamesData() {
         for (let i = 0; i< len; i++) {
             boards[a][`player_${i+1}`] = $('poll[name *= "suggested_numplayers"] result[value *= "Best"]', dom)[i].attribs.numvotes }
     } 
+    }
+
+     await createBoard();
+    
         
     
     
