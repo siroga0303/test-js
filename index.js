@@ -76,7 +76,7 @@ async function getGamesData() {
     }
 
      await Promise.all([await createBoard(20, 0),timeout(15000)]);
-     await Promise.all([await createBoard(40, 20,timeout(15000)]);
+     await Promise.all([await createBoard(40, 20),timeout(15000)]);
      await Promise.all([await createBoard(60, 40),timeout(15000)]);
      await Promise.all([await createBoard(80, 60),timeout(15000)]);
      await Promise.all([await createBoard(100, 80),timeout(15000)]);
