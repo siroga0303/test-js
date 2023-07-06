@@ -52,10 +52,14 @@ async function getJson() {
 async function getGamesData() {
     Jsondata = await getJson();
     let xml;
-    
+    console.log("start")
     async function createBoard(part, number) {
-    console.log(part,number)
+
+         
+    
     for(let a = number; a < part; a++){
+
+         
         console.log(a)
         xml = await rp(`https://boardgamegeek.com/xmlapi/boardgame/${Jsondata[a]}?stats=1`);
         const dom = htmlparser2.parseDocument(xml);
@@ -67,31 +71,21 @@ async function getGamesData() {
         boards[a].rating = $('ratings average', dom).text()
         let len = $('poll[name *= "suggested_numplayers"] results result[value *= "Best"]', dom).length
         for (let i = 0; i< len; i++) {
-            boards[a][`player_${i+1}`] = $('poll[name *= "suggested_numplayers"] result[value *= "Best"]', dom)[i].attribs.numvotes
-            
-        }
+            boards[a][`player_${i+1}`] = $('poll[name *= "suggested_numplayers"] result[value *= "Best"]', dom)[i].attribs.numvotes }
     } 
         
     }
     
-    await  function createBoard(20, 0)
-     await  function createBoard(40, 20)
-         await  function createBoard(60, 40)
-         await  function createBoard(80, 60)
-         await  function createBoard(100, 80)
+         await  function createBoard(20, 0);
+          await  function createBoard(40, 20);
+         await  function createBoard(60, 40);
+         await  function createBoard(80, 60);
+         await  function createBoard(100, 80);
     
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
      return JSON.stringify(boards)
 }
 let a;
