@@ -76,6 +76,10 @@ async function getGamesData() {
     }
 
      await createBoard(20, 0);
+     await createBoard(40, 20);
+     await createBoard(60, 40);
+     await createBoard(80, 60);
+     await createBoard(100, 80);
     
         
     
