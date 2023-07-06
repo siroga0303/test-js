@@ -52,11 +52,11 @@ async function getJson() {
 async function getGamesData() {
     Jsondata = await getJson();
     let xml;
-    let part = parseInt(Jsondata.length/10)
+    let part = 20
    
     let number = 0;
     async function createBoard(part, number) {
-    
+    console.log(part,number)
     for(let a = number; a < part; a++){
         console.log(a)
         xml = await rp(`https://boardgamegeek.com/xmlapi/boardgame/${Jsondata[a]}?stats=1`);
@@ -82,8 +82,9 @@ for await (const startTime of setInterval(interval, Date.now())) {
   const now = Date.now();
      await createBoard(part, number)
      number =+ part
+     part += part
   console.log(now);
-  if ((now - startTime) > 100000)
+  if ((now - startTime) > 50000)
     break;
 }
 console.log(Date.now());
