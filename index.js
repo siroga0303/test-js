@@ -2,6 +2,7 @@ const express = require('express')
 const rp = require('request-promise');
 const cher = require('cheerio');
 const htmlparser2 = require('htmlparser2');
+const cors = require('cors')
 const url = 'https://boardgamegeek.com/browse/boardgame';
 const app = express()
 const port = 3000
@@ -39,7 +40,7 @@ async function getJson() {
 
 
 let a;
-app.get('/', async (req, res, next) => {
+app.get('/', cors(corsOptions), async (req, res, next) => {
     console.log('ID:')
     a = await getJson()
     
