@@ -52,9 +52,7 @@ async function getJson() {
 async function getGamesData() {
     Jsondata = await getJson();
     let xml;
-    let part = 20
-   
-    let number = 0;
+    
     async function createBoard(part, number) {
     console.log(part,number)
     for(let a = number; a < part; a++){
@@ -76,18 +74,12 @@ async function getGamesData() {
         
     }
     
-     
-    const interval = 10000;
-for await (const startTime of setInterval(interval, Date.now())) {
-  const now = Date.now();
-     await createBoard(part, number)
-     number =+ part
-     part += part
-  console.log(now);
-  if ((now - startTime) > 50000)
-    break;
-}
-console.log(Date.now());
+    await  function createBoard(20, 0)
+     await  function createBoard(40, 20)
+         await  function createBoard(60, 40)
+         await  function createBoard(80, 60)
+         await  function createBoard(100, 80)
+    
     
     
     
