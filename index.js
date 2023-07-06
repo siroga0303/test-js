@@ -43,7 +43,7 @@ async function getJson() {
     }
     
     let xml;
-    for(let a = 0; a < wikiID.length; a++){
+    for(let a = 0; a < wikiID.length/2; a++){
         console.log(a)
         xml = await rp(`https://boardgamegeek.com/xmlapi/boardgame/${wikiID[a]}?stats=1`);
     }
