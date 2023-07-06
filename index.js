@@ -7,9 +7,9 @@ let numberPage;
 const url = `https://boardgamegeek.com/browse/boardgame/page/${numberPage}`;
 const app = express()
 const port = 3000
-import {
-  setInterval,
-} from 'timers/promises';
+const {
+     setInterval
+} = require('node:timers/promises');
 let Jsondata;
 const corsOptions = {
     origin: '*',
