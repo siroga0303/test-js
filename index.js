@@ -54,7 +54,7 @@ async function getGamesData() {
     let xml;
     let part = parseInt(Jsondata.length/10)
    
-    
+    let number = 0;
     async function createBoard(part, number) {
     
     for(let a = number; a < part; a++){
@@ -77,11 +77,13 @@ async function getGamesData() {
     }
     
      
-    const interval = 100;
+    const interval = 10000;
 for await (const startTime of setInterval(interval, Date.now())) {
   const now = Date.now();
+     await createBoard(part, number)
+     number =+ part
   console.log(now);
-  if ((now - startTime) > 1000)
+  if ((now - startTime) > 100000)
     break;
 }
 console.log(Date.now());
