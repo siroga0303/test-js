@@ -52,7 +52,7 @@ async function getGamesData() {
     let part1 = Jsondata.length/2
     let part2 = Jsondata.length - part1
     
-    function createBoard(part, number) {
+    async function createBoard(part, number) {
     
     for(let a = number; a < part; a++){
         console.log(a)
