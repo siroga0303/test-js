@@ -72,7 +72,7 @@ async function getGamesData() {
     } 
         
     }
-    const setTimeoutAsync = (cb, delay,value1,value2) =>
+    
   
     await createBoard(part1, 0)
     
