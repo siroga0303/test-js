@@ -79,7 +79,7 @@ async function getGamesData(Jsondata) {
 
     
 
-     return JSON.stringify(boards)
+     return boards
 }
 let a;
 let b;
@@ -88,7 +88,7 @@ app.get('/get', cors(corsOptions), async (req, res, next) => {
     console.log(numberPage)
     
     b = await getJson()
-    //a = await getJson(b);
+    a = await getJson(b);
     
     next()
   }, (req, res, next) => {
