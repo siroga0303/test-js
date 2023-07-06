@@ -53,11 +53,11 @@ async function getGamesData() {
     Jsondata = await getJson();
     let xml;
     console.log("start")
-    async function createBoard(part, number) {
+    
 
          
     
-    for(let a = number; a < part; a++){
+    for(let a = 0; a < 20; a++){
 
          
         console.log(a)
@@ -74,13 +74,9 @@ async function getGamesData() {
             boards[a][`player_${i+1}`] = $('poll[name *= "suggested_numplayers"] result[value *= "Best"]', dom)[i].attribs.numvotes }
     } 
         
-    }
     
-         await  function createBoard(20, 0);
-          await  function createBoard(40, 20);
-         await  function createBoard(60, 40);
-         await  function createBoard(80, 60);
-         await  function createBoard(100, 80);
+    
+        
     
     
     
