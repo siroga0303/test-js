@@ -88,12 +88,9 @@ app.get('/get', cors(corsOptions), async (req, res, next) => {
     console.log(numberPage)
     
     b = await getJson()
-    a = await getJson(b);
-    
-    next()
-  }, (req, res, next) => {
-    
+    //a = await getJson(b);
     res.send(b)
+    
   })
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
