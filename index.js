@@ -85,10 +85,30 @@ async function getGamesData() {
 app.get('/get', cors(corsOptions), async (req, res) => {
     numberPage = req.query.id
     let a = await getGamesData()
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
     res.send(a)
   });
+
+
+app.use(function (req, res, next) {
+    var origins = [
+        'http://example.com',
+        'http://www.example.com'
+    ];
+
+    for(var i = 0; i < origins.length; i++){
+        var origin = origins[i];
+
+        if(req.headers.origin.indexOf(origin) > -1){
+            res.header('Access-Control-Allow-Origin', req.headers.origin);
+        }
+    }
+    
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
