@@ -84,7 +84,8 @@ async function getGamesData() {
 let a;
 app.get('/get', cors(corsOptions), async (req, res, next) => {
     numberPage = req.query.id
-    a = await getJson()
+    numberPage = 1
+    a = await getGamesData()
     
     next()
   }, (req, res, next) => {
