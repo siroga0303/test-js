@@ -71,35 +71,20 @@ async function createBoard(num1, num2) {
             boards[a][`player_${i+1}`] = $('poll[name *= "suggested_numplayers"] result[value *= "Best"]', dom)[i].attribs.numvotes }
     } 
     
-function timeout(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-     await Promise.all([await createBoard(20, 0),timeout(15000)]);
-     await Promise.all([await createBoard(40, 20),timeout(15000)]);
-     await Promise.all([await createBoard(60, 40),timeout(15000)]);
-     await Promise.all([await createBoard(80, 60),timeout(15000)]);
-     await Promise.all([await createBoard(100, 80),timeout(15000)]);
+ 
      
-
-     
-    
-        
-    
-    
-        
-    
-    
-    
-    
-
-     return JSON.stringify(boards)
     }
+
+async function final() {
+    await createBoard(20, 0)
+    return JSON.stringify(boards)
+}
 let a;
 app.get('/get', cors(corsOptions), async (req, res, next) => {
     numberPage = req.query.id
     
    
-    a = await createBoard()
+    a = await final()
     next()
   }, (req, res, next) => {
     
