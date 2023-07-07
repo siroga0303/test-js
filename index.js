@@ -51,7 +51,7 @@ async function getJson() {
 async function createBoard(num1, num2) {
           await getJson()
          let xml;
-         console.log("start", num1. num2)
+         console.log("start", num1, num2)
          for(let a = num2; a < num1; a++){
           
          
