@@ -7,7 +7,7 @@ let numberPage;
 const url = `https://boardgamegeek.com/browse/boardgame/page/${numberPage}`;
 const app = express()
 const port = 3000
-const {setInterval} = require('node:timers/promises');
+const setTimeoutP = require('timers/promises').setTimeout;
 let Jsondata;
 const corsOptions = {
     origin: '*',
@@ -76,7 +76,9 @@ async function createBoard(num1, num2) {
     }
 
 async function final() {
-    await createBoard(20, 0)
+    await createBoard(20, 0);
+    await setTimeoutP(15000);
+    await createBoard(40, 20);
     return JSON.stringify(boards)
 }
 let a;
