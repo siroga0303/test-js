@@ -3,28 +3,25 @@ const rp = require('request-promise');
 const cher = require('cheerio');
 const htmlparser2 = require('htmlparser2');
 const cors = require('cors')
-let numberPage;
-const url = `https://boardgamegeek.com/browse/boardgame/page/${numberPage}`;
-const app = express()
-const port = 3000
 const setTimeoutP = require('timers/promises').setTimeout;
-let Jsondata;
-const corsOptions = {
-    origin: '*',
-    methods: [],
-    allowedHeaders: [],
-    exposedHeaders: [],
-    credentials: true
-};
+
+
+
+
 let boards = [];
-async function getJson() {
-    const html = await rp(url);
+
+
+async function getJson(numberPage) {
     
-    //success!
-    const wikiUrls = [];
-    const wikiID = [];
-    const dom = htmlparser2.parseDocument(html);
-    const $ = cher.load(dom);
+    let url = `https://boardgamegeek.com/browse/boardgame/page/${numberPage}`;
+    let html = await rp(url);
+    let Jsondata = [];
+    let wikiUrls = [];
+    let wikiID = [];
+
+    
+    let dom = htmlparser2.parseDocument(html);
+    let $ = cher.load(dom);
     let len = $('td[class *= "collection_thumbnail"] a[href *= "/boardgame"]', html).length;
     
     for (let i = 0; i < len; i++) {
@@ -43,13 +40,13 @@ async function getJson() {
     
     Jsondata = [];
     Jsondata = wikiID
-    
+    return Jsondata
   
   
 }
 
-async function createBoard(num1, num2) {
-          await getJson()
+async function createBoard(num1, num2,numberPage) {
+         let Jsondata = await getJson(numberPage)
          let xml;
          console.log("start", num1, num2)
          for(let a = num2; a < num1; a++){
@@ -71,23 +68,36 @@ async function createBoard(num1, num2) {
             boards[a][`player_${i+1}`] = $('poll[name *= "suggested_numplayers"] result[value *= "Best"]', dom)[i].attribs.numvotes }
     } 
     
- 
+     console.log(boards.slice(num2,num1))
      return JSON.stringify(boards.slice(num2,num1))
     }
 
 
-let a;
+
+
+
+const app = express()
+const port = 3000
+const corsOptions = {
+    origin: '*',
+    methods: [],
+    allowedHeaders: [],
+    exposedHeaders: [],
+    credentials: true
+};
+
+
 app.get('/get', cors(corsOptions), async (req, res, next) => {
     numberPage = req.query.id
-    num1 = req.query.num1
-    num2 = req.query.num2
+    num1 = parseInt(req.query.num1)
+    num2 = parseInt(req.query.num2)
    
-    a = await createBoard(num1,num2)
-    next()
-  }, (req, res, next) => {
-    
+    let a = await createBoard(num1,num2,numberPage)
+    boards.splice(0,boards.length)
     res.send(a)
   })
+
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
