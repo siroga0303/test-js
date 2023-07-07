@@ -26,7 +26,7 @@ async function getJson(numberPage) {
     
     for (let i = 0; i < len; i++) {
         wikiUrls.push($('td[class *= "collection_thumbnail"] a[href *= "/boardgame"]', html)[i].attribs.href);
-        boards.push( { imgUrl: $('td[class *= "collection_thumbnail"] a[href *= "/boardgame"] img', html)[i].attribs.src , imgAlt: $('td[class *= "collection_thumbnail"] a[href *= "/boardgame"] img', html)[i].attribs.alt})
+        boards.push( { imgUrl: "" , imgAlt: $('td[class *= "collection_thumbnail"] a[href *= "/boardgame"] img', html)[i].attribs.alt})
     } 
     
     const re = new RegExp("/[A-Za-z]+/[0-9]+");
@@ -58,6 +58,7 @@ async function createBoard(num1, num2,numberPage) {
               catch(e) {console.log(e)}
         const dom = htmlparser2.parseDocument(xml);
         const $ = cher.load(dom);
+        boards[a].imgUrl = $("image", dom).text()
         boards[a].minplaytime = $("minplaytime", dom).text()
         boards[a].maxplaytime = $("maxplaytime", dom).text()
         let totalvotes = $('poll[name *= "suggested_numplayers"]', dom).attr().totalvotes
