@@ -72,21 +72,17 @@ async function createBoard(num1, num2) {
     } 
     
  
-     
+     return JSON.stringify(boards)
     }
 
-async function final() {
-    await createBoard(20, 0);
-    await setTimeoutP(15000);
-    await createBoard(40, 20);
-    return JSON.stringify(boards)
-}
+
 let a;
 app.get('/get', cors(corsOptions), async (req, res, next) => {
     numberPage = req.query.id
-    
+    num1 = req.query.num1
+    num2 = req.query.num2
    
-    a = await final()
+    a = await createBoard(num1,num2)
     next()
   }, (req, res, next) => {
     
