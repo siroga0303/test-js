@@ -99,7 +99,7 @@ app.get('/get', cors(corsOptions), async (req, res, next) => {
     numberPage = req.query.id
     
    
-    a = await getGamesData()
+    a = await createBoard()
     next()
   }, (req, res, next) => {
     
