@@ -68,7 +68,7 @@ async function createBoard(num1, num2,numberPage) {
             boards[a][`player_${i+1}`] = $('poll[name *= "suggested_numplayers"] result[value *= "Best"]', dom)[i].attribs.numvotes }
     } 
     
-     console.log(boards.slice(num2,num1))
+     
      return JSON.stringify(boards.slice(num2,num1))
     }
 
