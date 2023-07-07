@@ -41,7 +41,7 @@ async function getJson() {
     }
     
     
-    
+    Jsondata = [];
     Jsondata = wikiID
     
   
@@ -72,7 +72,7 @@ async function createBoard(num1, num2) {
     } 
     
  
-     return JSON.stringify(boards)
+     return JSON.stringify(boards.slice(num2,num1)
     }
 
 
