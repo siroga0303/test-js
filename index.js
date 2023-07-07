@@ -7,9 +7,7 @@ let numberPage;
 const url = `https://boardgamegeek.com/browse/boardgame/page/${numberPage}`;
 const app = express()
 const port = 3000
-const {
-     setInterval
-} = require('node:timers/promises');
+const {setInterval} = require('node:timers/promises');
 let Jsondata;
 const corsOptions = {
     origin: '*',
@@ -44,24 +42,23 @@ async function getJson() {
     
     
     
-    return wikiID
+    Jsondata = wikiID
     
   
   
 }
-async function getGamesData() {
-    Jsondata = await getJson();
-    let xml;
-    console.log("start")
-    
 
-         
-    async function createBoard(num1, num2) {
+async function createBoard(num1, num2) {
+          await getJson()
+         let xml;
+         console.log("start", num1. num2)
          for(let a = num2; a < num1; a++){
-
+          
          
         console.log(a)
-        xml = await rp(`https://boardgamegeek.com/xmlapi/boardgame/${Jsondata[a]}?stats=1`);
+              try {
+        xml = await rp(`https://boardgamegeek.com/xmlapi/boardgame/${Jsondata[a]}?stats=1`); }
+              catch(e) {console.log(e)}
         const dom = htmlparser2.parseDocument(xml);
         const $ = cher.load(dom);
         boards[a].minplaytime = $("minplaytime", dom).text()
@@ -73,7 +70,7 @@ async function getGamesData() {
         for (let i = 0; i< len; i++) {
             boards[a][`player_${i+1}`] = $('poll[name *= "suggested_numplayers"] result[value *= "Best"]', dom)[i].attribs.numvotes }
     } 
-    }
+    
 function timeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -96,7 +93,7 @@ function timeout(ms) {
     
 
      return JSON.stringify(boards)
-}
+    }
 let a;
 app.get('/get', cors(corsOptions), async (req, res, next) => {
     numberPage = req.query.id
