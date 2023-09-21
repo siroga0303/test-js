@@ -9,7 +9,7 @@ const setTimeoutP = require('timers/promises').setTimeout;
 
 
 let boards = [];
-
+let id = 0;
 
 async function getJson(numberPage) {
     
@@ -46,6 +46,7 @@ async function getJson(numberPage) {
 }
 
 async function createBoard(num1, num2,numberPage) {
+    
          let Jsondata = await getJson(numberPage)
          let xml;
          console.log("start", num1, num2)
@@ -58,6 +59,8 @@ async function createBoard(num1, num2,numberPage) {
               catch(e) {console.log(e)}
         const dom = htmlparser2.parseDocument(xml);
         const $ = cher.load(dom);
+        boards[a].id = id;
+        id = id + 1;
         boards[a].imgUrl = $("image", dom).text()
         boards[a].minplaytime = $("minplaytime", dom).text()
         boards[a].maxplaytime = $("maxplaytime", dom).text()
